@@ -57,7 +57,7 @@ resource "vsphere_virtual_machine" "ubuntu_static" {
   num_cpus = var.ubuntu.cpu
   memory = var.ubuntu.memory
   wait_for_guest_net_routable = var.ubuntu.wait_for_guest_net_routable
-  guest_id = "guestid-${var.ubuntu.basename}${random_string.ubuntu_name_id_static[count.index].result}"
+  guest_id = "ubuntu64Guest"
 
   disk {
     size             = var.ubuntu.disk
@@ -119,7 +119,7 @@ resource "vsphere_virtual_machine" "ubuntu_dhcp" {
   num_cpus = var.ubuntu.cpu
   memory = var.ubuntu.memory
   wait_for_guest_net_routable = var.ubuntu.wait_for_guest_net_routable
-  guest_id = "guestid-${var.ubuntu.basename}${random_string.ubuntu_name_id[count.index].result}"
+  guest_id = "ubuntu64Guest"
 
   disk {
     size             = var.ubuntu.disk
