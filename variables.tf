@@ -61,7 +61,7 @@ variable "ubuntu" {
     cpu = 24
     if_name = "ens192"
     memory = 65536
-    disk = 98304
+    disk = 128
     wait_for_guest_net_routable = "false"
     netplanFile = "/etc/netplan/50-cloud-init.yaml"
   }
