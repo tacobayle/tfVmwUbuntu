@@ -1,4 +1,4 @@
-# terraformVmwUbuntu
+# tfVmwUbuntu
 
 ## Goal
 Spin up x Ubuntu host (with a basic apache server) in vCenter from content library based on Terraform
@@ -23,12 +23,14 @@ Terraform Plan has/have been tested against:
 ### terraform
 
 ```
-Terraform v0.13.1
-+ provider registry.terraform.io/hashicorp/null v2.1.2
-+ provider registry.terraform.io/hashicorp/template v2.1.2
-+ provider registry.terraform.io/hashicorp/vsphere v1.24.0
-+ provider registry.terraform.io/terraform-providers/nsxt v3.0.1
-Your version of Terraform is out of date! The latest version is 0.13.2. You can update by downloading from https://www.terraform.io/downloads.html
+Terraform v1.0.6
+on linux_amd64
++ provider registry.terraform.io/hashicorp/local v2.1.0
++ provider registry.terraform.io/hashicorp/null v3.1.0
++ provider registry.terraform.io/hashicorp/random v3.1.0
++ provider registry.terraform.io/hashicorp/template v2.2.0
++ provider registry.terraform.io/hashicorp/tls v3.1.0
++ provider registry.terraform.io/hashicorp/vsphere v2.0.2
 ```
 
 ### V-center/ESXi version:
@@ -46,7 +48,7 @@ ESXi host - 7.0.0 Build 16324942
 
 ## Run the terraform plan:
 ```
-git clone https://github.com/tacobayle/terraformVmwUbuntu ; cd terraformVmwUbuntu ; terraform init ; terraform apply -auto-approve
+git clone https://github.com/tacobayle/tfVmwUbuntu ; cd tfVmwUbuntu ; terraform init ; terraform apply -auto-approve
 ```
 
 ## Outputs:
