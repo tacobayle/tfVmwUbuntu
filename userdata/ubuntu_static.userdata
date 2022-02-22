@@ -12,6 +12,15 @@ chpasswd:
 hostname: ${hostname}
 
 write_files:
+  - encoding: base64
+    content: ${network_config}
+    path: /etc/netplan/50-cloud-init.yaml
+  - content: |
+      #!/bin/bash
+      if_name=$(ip -o link show | awk -F': ' '{print $2}' | tail -1)
+      sed -i -e "s/if_name_to_be_replaced/\"$if_name\"/g" /etc/netplan/50-cloud-init.yaml
+    path: /opt/replace_if_name.sh
+    permissions: "0755"
   - content: |
       #!/bin/bash
       # apt config
@@ -22,13 +31,11 @@ write_files:
       echo "cloud init done" | tee /tmp/cloudInitDone.log
     path: /opt/bootstrap.sh
     permissions: "0755"
-  - encoding: base64
-    content: ${network_config}
-    path: /etc/netplan/50-cloud-init.yaml
   - content: |
       network: {config: disabled}
     path: /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
 
 runcmd:
+  - /opt/replace_if_name.sh
   - netplan apply
   - /opt/bootstrap.sh

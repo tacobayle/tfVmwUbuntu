@@ -42,7 +42,7 @@ variable "ssh_key" {
 }
 
 variable "dhcp" {
-  default = true
+  default = false
 }
 
 variable "content_library" {
@@ -59,7 +59,7 @@ variable "ubuntu" {
     count = 1
     username = "ubuntu"
     cpu = 24
-    if_name = "ens192"
+//    if_name = "ens192"
     memory = 65536
     disk = 96
     wait_for_guest_net_routable = "false"
