@@ -48,7 +48,7 @@ variable "dhcp" {
 variable "content_library" {
   default = {
     basename = "content_library_tf_"
-    source_url = "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.ova"
+    source_url = "https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.ova"
   }
 }
 
@@ -59,7 +59,6 @@ variable "ubuntu" {
     count = 1
     username = "ubuntu"
     cpu = 24
-//    if_name = "ens192"
     memory = 65536
     disk = 96
     wait_for_guest_net_routable = "false"
