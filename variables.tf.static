@@ -42,7 +42,7 @@ variable "ssh_key" {
 }
 
 variable "dhcp" {
-  default = false
+  default = true
 }
 
 variable "content_library" {
@@ -56,12 +56,11 @@ variable "ubuntu" {
   type = map
   default = {
     basename = "ubuntu-tf-"
-    count = 2
+    count = 1
     username = "ubuntu"
-    cpu = 1
-    if_name = "ens192"
-    memory = 2048
-    disk = 20
+    cpu = 24
+    memory = 65536
+    disk = 96
     wait_for_guest_net_routable = "false"
     netplanFile = "/etc/netplan/50-cloud-init.yaml"
   }
