@@ -97,6 +97,13 @@ resource "vsphere_virtual_machine" "ubuntu_static" {
   }
 }
 
+resource "null_resource" "clear_ssh_key_locally_static" {
+  count            = var.dhcp == false ? length(var.ubuntu_ip4_addresses) : 0
+  provisioner "local-exec" {
+    command = "ssh-keygen -f \"/home/ubuntu/.ssh/known_hosts\" -R \"${split("/", var.ubuntu_ip4_addresses[count.index])[0]}\" || true"
+  }
+}
+
 data "template_file" "ubuntu_userdata_dhcp" {
   template = file("${path.module}/userdata/ubuntu_dhcp.userdata")
   count            = (var.dhcp == true ? 1 : 0)
@@ -156,5 +163,12 @@ resource "vsphere_virtual_machine" "ubuntu_dhcp" {
     inline      = [
       "while [ ! -f /tmp/cloudInitDone.log ]; do sleep 1; done"
     ]
+  }
+}
+
+resource "null_resource" "clear_ssh_key_locally_dhcp" {
+  count            = var.dhcp == true ? var.ubuntu.count : 0
+  provisioner "local-exec" {
+    command = "ssh-keygen -f \"/home/ubuntu/.ssh/known_hosts\" -R \"${vsphere_virtual_machine.ubuntu_dhcp.default_ip_address}\" || true"
   }
 }

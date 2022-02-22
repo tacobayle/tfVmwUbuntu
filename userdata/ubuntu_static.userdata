@@ -19,6 +19,7 @@ write_files:
       #!/bin/bash
       if_name=$(ip -o link show | awk -F': ' '{print $2}' | tail -1)
       sed -i -e "s/if_name_to_be_replaced/\"$if_name\"/g" /etc/netplan/50-cloud-init.yaml
+      sudo sed -i -e 's/\"//g' /etc/netplan/50-cloud-init.yaml
     path: /opt/replace_if_name.sh
     permissions: "0755"
   - content: |
